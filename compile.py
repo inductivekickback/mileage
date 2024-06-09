@@ -3,6 +3,7 @@ import sys
 import csv
 import argparse
 import math
+import pickle
 
 import googlemaps
 
@@ -145,20 +146,45 @@ def _main():
                             help='Path to CSV input file containing locations')
     parser.add_argument('--out_file', type=str, required=True,
                             help='Path to output file')
-    parser.add_argument('--key', type=str, required=True,
+    parser.add_argument('--key', type=str, required=False,
                             help='Google API KEY with Distance Matrix permissions')
+    parser.add_argument('--data_out', type=str, required=False,
+                            help='Path to file for storing parsed addresses + distances.')
+    parser.add_argument('--data_in', type=str, required=False,
+                            help='Path to file for storing parsed addresses + distances.')
     args = parser.parse_args()
 
+    if not args.key and not args.data_in:
+        print('ERROR: Either an API KEY or data file is required.')
+        sys.exit(-3)
+
     addrs = None
-    try:
-        addrs = _import_addresses(args.in_file)
-    except FileNotFoundError as err:
-        print(err)
-        sys.exit(-1)
+    data = None
+    if args.data_in:
+        with open(args.data_in, 'rb') as file:
+            addrs, data = pickle.load(file)
+
+    if not addrs:
+        try:
+            addrs = _import_addresses(args.in_file)
+        except FileNotFoundError as err:
+            print(err)
+            sys.exit(-1)
 
     pairs, colocations = _generate_pairs(addrs)
-    data = _create_data(pairs, colocations, addrs, args.key)
+
+    if not data:
+        data = _create_data(pairs, colocations, addrs, args.key)
     cats = _split_and_sort(addrs)
+
+    if args.data_out:
+        try:
+            # Don't crash just because the data file couldn't be opened.
+            with open(args.data_out, 'wb') as file:
+                pickle.dump((addrs, data), file)
+        except Exception as err:
+            print(err)
+            print((addrs, data))
 
     _create_output(args.out_file, cats, data)
     sys.exit(0)
