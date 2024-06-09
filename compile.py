@@ -158,6 +158,9 @@ def _main():
         print('ERROR: Either an API KEY or data file is required.')
         sys.exit(-3)
 
+    if args.in_file and args.data_in:
+        print('WARNING: Ignoring CSV input file because an input data file was specified.')
+
     addrs = None
     data = None
     if args.data_in:
