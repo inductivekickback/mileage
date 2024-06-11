@@ -1,4 +1,4 @@
-"""Uses Google maps to compute the shortest-possible driving distances between all 4J schooles."""
+"""Uses Google maps to compute the shortest-possible driving distances between all 4J schools."""
 import sys
 import csv
 import argparse
