@@ -142,7 +142,7 @@ def _create_data(pairs, colocations, addresses, api_key):
 
 def _main():
     parser = argparse.ArgumentParser(description='Generate a table of distances between locations.')
-    parser.add_argument('--in_file', type=str, required=True,
+    parser.add_argument('--in_file', type=str, required=False,
                             help='Path to CSV input file containing locations')
     parser.add_argument('--out_file', type=str, required=True,
                             help='Path to output file')
@@ -160,6 +160,10 @@ def _main():
 
     if args.in_file and args.data_in:
         print('WARNING: Ignoring CSV input file because an input data file was specified.')
+
+    if not args.in_file and not args.data_in:
+        print('ERROR: Either an input file or data file is required.')
+        sys.exit(-3)
 
     addrs = None
     data = None
