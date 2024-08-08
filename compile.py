@@ -15,8 +15,8 @@ SCHOOL_ADDR_INDX = 1
 
 def _import_addresses(file_name):
     d = {}
-    with open(file_name, newline='', encoding='utf-8') as csvfile:
-        reader = csv.DictReader(csvfile)
+    with open(file_name, newline='', encoding='utf-8') as csv_file:
+        reader = csv.DictReader(csv_file)
         # NOTE: There are multiple locations with the same address but different names!
         for row in reader:
             addr = ','.join([s.strip() for s in
@@ -70,7 +70,7 @@ def _query_dist(origin, dest, addresses, api_key):
     return meters
 
 
-def _create_output(out_file, cats, distances):
+def _create_output(table_file, cats, distances):
     data = [['']]
 
     # Offset column titles by a space.
@@ -95,7 +95,7 @@ def _create_output(out_file, cats, distances):
                 else:
                     data[i+1].append('X')
 
-    with open(out_file, mode='w', newline='', encoding='utf-8') as file:
+    with open(table_file, mode='w', newline='', encoding='utf-8') as file:
         writer = csv.writer(file)
         writer.writerows(data)
 
@@ -142,26 +142,26 @@ def _create_data(pairs, colocations, addresses, api_key):
 
 def _main():
     parser = argparse.ArgumentParser(description='Generate a table of distances between locations.')
-    parser.add_argument('--in_file', type=str, required=False,
+    parser.add_argument('--address_file', type=str, required=False,
                             help='Path to CSV input file containing locations')
-    parser.add_argument('--out_file', type=str, required=True,
-                            help='Path to output file')
-    parser.add_argument('--key', type=str, required=False,
+    parser.add_argument('--table_file', type=str, required=True,
+                            help='Path to CSV output file')
+    parser.add_argument('--api_key', type=str, required=False,
                             help='Google API KEY with Distance Matrix permissions')
     parser.add_argument('--data_out', type=str, required=False,
-                            help='Path to file for storing parsed addresses + distances.')
+                            help='Path to pickle file for storing parsed addresses + distances.')
     parser.add_argument('--data_in', type=str, required=False,
-                            help='Path to file for storing parsed addresses + distances.')
+                            help='Path to pickle file for storing parsed addresses + distances.')
     args = parser.parse_args()
 
-    if not args.key and not args.data_in:
+    if not args.api_key and not args.data_in:
         print('ERROR: Either an API KEY or data file is required.')
         sys.exit(-3)
 
-    if args.in_file and args.data_in:
+    if args.address_file and args.data_in:
         print('WARNING: Ignoring CSV input file because an input data file was specified.')
 
-    if not args.in_file and not args.data_in:
+    if not args.address_file and not args.data_in:
         print('ERROR: Either an input file or data file is required.')
         sys.exit(-3)
 
@@ -173,7 +173,7 @@ def _main():
 
     if not addrs:
         try:
-            addrs = _import_addresses(args.in_file)
+            addrs = _import_addresses(args.address_file)
         except FileNotFoundError as err:
             print(err)
             sys.exit(-1)
@@ -181,7 +181,7 @@ def _main():
     pairs, colocations = _generate_pairs(addrs)
 
     if not data:
-        data = _create_data(pairs, colocations, addrs, args.key)
+        data = _create_data(pairs, colocations, addrs, args.api_key)
     cats = _split_and_sort(addrs)
 
     if args.data_out:
@@ -193,7 +193,7 @@ def _main():
             print(err)
             print((addrs, data))
 
-    _create_output(args.out_file, cats, data)
+    _create_output(args.table_file, cats, data)
     sys.exit(0)
 
 
