@@ -15,7 +15,7 @@ SCHOOL_ADDR_INDX = 1
 
 def _import_addresses(file_name):
     d = {}
-    with open(file_name, newline='') as csvfile:
+    with open(file_name, newline='', encoding='utf-8') as csvfile:
         reader = csv.DictReader(csvfile)
         # NOTE: There are multiple locations with the same address but different names!
         for row in reader:
@@ -95,7 +95,7 @@ def _create_output(out_file, cats, distances):
                 else:
                     data[i+1].append('X')
 
-    with open(out_file, mode='w', newline='') as file:
+    with open(out_file, mode='w', newline='', encoding='utf-8') as file:
         writer = csv.writer(file)
         writer.writerows(data)
 
