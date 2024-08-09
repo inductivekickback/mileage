@@ -19,8 +19,13 @@ def _import_addresses(file_name):
         reader = csv.DictReader(csv_file)
         # NOTE: There are multiple locations with the same address but different names!
         for row in reader:
-            addr = ','.join([s.strip() for s in
-                          (row['Street Address'], row['City'], row['State'], row['Zip Code'])])
+            query_addr = [row['Street Address'], row['City'], row['State'], row['Zip Code']]
+            # Some addresses are ambiguous to google. For example, '850 Howard Ave' was recently
+            # confused with '850 East Howard Ave'. To prevent this, the full school name can be
+            # added to the address as necessary.
+            if row['Full Name']:
+                query_addr.insert(0, row['Full Name'])
+            addr = ', '.join(s.strip() for s in query_addr)
             d[row['Name']] = (row['Type'], addr)
     return d
 

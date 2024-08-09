@@ -1,36 +1,36 @@
-Type,Name,Street Address,City,State,Zip Code
-E,Adams,950 W 22nd Ave,Eugene,OR,97405
-E,Awbrey Park,158 Spring Creek Dr,Eugene,OR,97404
-E,Buena Vista,1500 Queens Way,Eugene,OR,97401
-E,Camas Ridge,1150 E 29th Ave,Eugene,OR,97403
-E,Charlemagne,3875 Kincaid St,Eugene,OR,97405
-E,Chávez,1510 W 14th Ave,Eugene,OR,97402
-E,CI,2200 Bailey Hill Rd,Eugene,OR,97405
-E,Edgewood,577 E 46th Ave,Eugene,OR,97405
-E,Edison,1328 E 22nd Ave,Eugene,OR,97403
-E,Family School,1155 Crest Dr,Eugene,OR,97405
-E,Fox Hollow,5055 Mahalo Dr,Eugene,OR,97405
-E,Gilham,3307 Honeywood St,Eugene,OR,97408
-E,Holt,770 Calvin St,Eugene,OR,97401
-E,Howard,700 Howard Ave,Eugene,OR,97404
-E,McCornack,1968 Brittany St,Eugene,OR,97405
-E,River Road,120 W Hilliard Ln,Eugene,OR,97404
-E,Spring Creek,560 Irvington Dr,Eugene,OR,97404
-E,Twin Oaks,85916 Bailey Hill Rd,Eugene,OR,97405
-E,Willagillespie,1125 Willagillespie Rd,Eugene,OR,97401
-E,YG,2855 Lincoln St,Eugene,OR,97405
-M,ATA,1650 W 22nd Ave,Eugene,OR,97405
-M,Cal Young,2555 Gilham Rd,Eugene,OR,97408
-M,Kelly,850 Howard Ave,Eugene,OR,97404
-M,Kennedy,2200 Bailey Hill Rd,Eugene,OR,97405
-M,Madison,875 Wilkes Dr,Eugene,OR,97404
-M,Monroe,2800 Bailey Ln,Eugene,OR,97401
-M,Roosevelt,500 E 24th Ave,Eugene,OR,97405
-M,Spencer Butte,500 E 43rd Ave,Eugene,OR,97405
-H,Churchill,1850 Bailey Hill Rd,Eugene,OR,97405
-H,ECCO,200 N Monroe St,Eugene,OR,97402
-H,North,220 Silver Ln,Eugene,OR,97404
-H,Sheldon,2455 Willakenzie Rd,Eugene,OR,97401
-H,South,400 E 19th Ave,Eugene,OR,97401
-O,Bailey Hill,2295 4 Oaks Grange Rd,Eugene,OR,97405
-O,Ed Center,200 N Monroe St,Eugene,OR,97402
+Type,Name,Full Name,Street Address,City,State,Zip Code
+E,Adams,,950 W 22nd Ave,Eugene,OR,97405
+E,Awbrey Park,Awbrey Park Elementary School,158 Spring Creek Dr,Eugene,OR,97404
+E,Buena Vista,,1470 Queens Way,Eugene,OR,97401
+E,Camas Ridge,,1150 E 29th Ave,Eugene,OR,97403
+E,Charlemagne,,3875 Kincaid St,Eugene,OR,97405
+E,Chávez,,1510 W 14th Ave,Eugene,OR,97402
+E,CI,,2200 Bailey Hill Rd,Eugene,OR,97405
+E,Edgewood,,577 E 46th Ave,Eugene,OR,97405
+E,Edison,,1328 E 22nd Ave,Eugene,OR,97403
+E,Family School,,1155 Crest Dr,Eugene,OR,97405
+E,Fox Hollow,,5055 Mahalo Dr,Eugene,OR,97405
+E,Gilham,,3307 Honeywood St,Eugene,OR,97408
+E,Holt,,770 Calvin St,Eugene,OR,97401
+E,Howard,,700 Howard Ave,Eugene,OR,97404
+E,McCornack,,1968 Brittany St,Eugene,OR,97405
+E,River Road,,120 W Hilliard Ln,Eugene,OR,97404
+E,Spring Creek,,560 Irvington Dr,Eugene,OR,97404
+E,Twin Oaks,,85916 Bailey Hill Rd,Eugene,OR,97405
+E,Willagillespie,,1125 Willagillespie Rd,Eugene,OR,97401
+E,YG,,2855 Lincoln St,Eugene,OR,97405
+M,ATA,,1650 W 22nd Ave,Eugene,OR,97405
+M,Cal Young,Cal Young Middle School,2555 Gilham Rd,Eugene,OR,97408
+M,Kelly,Kelly Middle School,850 Howard Ave,Eugene,OR,97404
+M,Kennedy,,2200 Bailey Hill Rd,Eugene,OR,97405
+M,Madison,Madison Middle School,875 Wilkes Dr,Eugene,OR,97404
+M,Monroe,,2800 Bailey Ln,Eugene,OR,97401
+M,Roosevelt,,500 E 24th Ave,Eugene,OR,97405
+M,Spencer Butte,,500 E 43rd Ave,Eugene,OR,97405
+H,Churchill,,1850 Bailey Hill Rd,Eugene,OR,97405
+H,ECCO,,200 N Monroe St,Eugene,OR,97402
+H,North,,220 Silver Ln,Eugene,OR,97404
+H,Sheldon,,2455 Willakenzie Rd,Eugene,OR,97401
+H,South,,400 E 19th Ave,Eugene,OR,97401
+O,Bailey Hill,,2295 4 Oaks Grange Rd,Eugene,OR,97405
+O,Ed Center,,200 N Monroe St,Eugene,OR,97402
