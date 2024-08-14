@@ -7,7 +7,6 @@ This program allows the user to:
  - Customize the set of school buildings to query, including names and precise addresses
  - Create a Comma Separated Value (CSV) spreadsheet containing the results
  - Serialize a Python dictionary to a file that contains the results, for use by other Python programs
- - Cross-platform support
 
 ### Requirements
 The googlemaps module can be installed from the command line using pip:
