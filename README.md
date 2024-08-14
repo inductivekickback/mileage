@@ -1,12 +1,12 @@
-The 4J School District expects employees to fill in expense reports for mileage and parking reimbursement using a form that does not automatically calculate the distance between two school buildings. Employees are instructed to use Google Maps to find the shortest-possible path between all of the building pairs on their form. There are more than 30 possible buildings to visit so this can be quite burdensome for employees that travel a lot.
+The 4J School District expects employees to fill in expense reports for mileage and parking reimbursement using a form that does not automatically calculate the distance between school buildings. Employees are instructed to use Google Maps to find the shortest-possible path between all of the building pairs on their forms. There are more than 30 possible buildings to visit so this can be quite burdensome for employees that travel a lot.
 
 ### Features
 This program allows the user to:
 
- - Use the Google Maps Directions API to find the shortest-possible path between buildings (in either direction)
- - Customize the set of school buildings to query, including names and precise addresses
- - Create a Comma Separated Value (CSV) spreadsheet containing the results
- - Serialize a Python dictionary to a file that contains the results, for use by other Python programs
+ - Use the Google Maps Directions API to find the shortest-possible path between buildings (both directions included in calculation)
+ - Customize the set of school buildings to query, including colloquial names and precise addresses
+ - Create a Comma Separated Value (CSV) table containing the results
+ - Serialize a Python dictionary to a file that contains the results for use by other Python programs
 
 ### Requirements
 The googlemaps module can be installed from the command line using pip:
@@ -31,8 +31,9 @@ optional arguments:
   --table_file TABLE_FILE
                         Path to CSV output file
   --api_key API_KEY     Google API KEY with Distance Matrix permissions
-  --data_out DATA_OUT   Path to pickle file for storing the result dict.
-  --data_in DATA_IN     Path to pickle file for loading a previously-stored result dict.
-```
-
+  --data_out DATA_OUT   Path to pickle file for storing the result dict
+  --data_in DATA_IN     Path to pickle file for loading a previously-stored result dict
+...
 python3 compile.py --address_file artefacts/addresses.csv --table_file artefacts/august_2024.csv --data_out artefacts/august_2024.pickle --api_key XXXX
+```
+A Google API key is required and each invocation will cost around $8 in API usage (as of August 2024) for a full run. If data (or partial data) from a previous run is specified then only pairs that don't already exist in the data will be calculated. Example data and CSV files are included in the 'artefacts' directory.
