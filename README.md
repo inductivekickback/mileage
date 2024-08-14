@@ -33,7 +33,10 @@ optional arguments:
   --api_key API_KEY     Google API KEY with Distance Matrix permissions
   --data_out DATA_OUT   Path to pickle file for storing the result dict
   --data_in DATA_IN     Path to pickle file for loading a previously-stored result dict
-...
-python3 compile.py --address_file artefacts/addresses.csv --table_file artefacts/august_2024.csv --data_out artefacts/august_2024.pickle --api_key XXXX
 ```
 A Google API key is required and each invocation will cost around $8 in API usage (as of August 2024) for a full run. If data (or partial data) from a previous run is specified then only pairs that don't already exist in the data will be calculated. Example data and CSV files are included in the 'artefacts' directory.
+
+**Example:** A complete run using the included reference set of addresses 
+```
+python3 compile.py --address_file artefacts/addresses.csv --table_file path_to_table_output_file.csv --data_out path_to_data_output_file.pickle --api_key YOUR_DEVELOPER_API_KEY
+```
