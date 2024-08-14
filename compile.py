@@ -154,9 +154,9 @@ def _main():
     parser.add_argument('--api_key', type=str, required=False,
                             help='Google API KEY with Distance Matrix permissions')
     parser.add_argument('--data_out', type=str, required=False,
-                            help='Path to pickle file for storing parsed addresses + distances.')
+                            help='Path to pickle file for storing the result dict.')
     parser.add_argument('--data_in', type=str, required=False,
-                            help='Path to pickle file for storing parsed addresses + distances.')
+                            help='Path to pickle file for loading a previously-stored result dict.')
     args = parser.parse_args()
 
     if not args.api_key and not args.data_in:
