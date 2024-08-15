@@ -8,7 +8,7 @@ This program allows the user to:
  - Create a Comma Separated Value (CSV) table containing the results
  - Serialize a Python dictionary to a file that contains the results for use by this or other Python programs
 
-**NOTE:** The [Distance Matrix API](https://developers.google.com/maps/documentation/distance-matrix/overview) is not used because it only offers the "best" route between buildings -- not a list from which you can determine the shortest distance.
+**NOTE:** The [Distance Matrix API](https://developers.google.com/maps/documentation/distance-matrix/overview) is **not** used because it only offers the "best" route between buildings -- not a list from which you can determine the shortest distance.
 
 ### Requirements
 The googlemaps module can be installed from the command line using pip:
@@ -42,3 +42,4 @@ A Google API key is required and each invocation will cost around $8 in API usag
 ```
 python3 compile.py --address_file artefacts/addresses.csv --table_file path_to_table_output_file.csv --data_out path_to_data_output_file.pickle --api_key YOUR_DEVELOPER_API_KEY
 ```
+**NOTE:** If you fork this repo (or any other public repo) be careful to [not push any commits containing your API key](https://trufflesecurity.com/blog/anyone-can-access-deleted-and-private-repo-data-github).
