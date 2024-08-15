@@ -1,4 +1,4 @@
-The 4J School District expects employees to fill in expense reports for mileage and parking reimbursement using a form that does not automatically calculate distances. Employees are instructed to use Google Maps to find the shortest-possible path between all of the building pairs on their forms; with more than 30 possible buildings to visit so this can be quite burdensome.
+The 4j School District expects employees to fill in expense reports for mileage and parking reimbursement using a form that does not automatically calculate distances. Employees are instructed to use Google Maps to find the shortest-possible path between all of the building pairs on their forms; with more than 30 possible buildings to visit this can be quite burdensome.
 
 ### Features
 This program allows the user to:
