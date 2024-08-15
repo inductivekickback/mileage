@@ -1,3 +1,5 @@
+### About
+<img src="https://github.com/user-attachments/assets/d8c10f15-ef63-4f5e-846b-9d3d0e3a5486" alt="Example CSV table" width="300" align="right" style="margin-right: 15px; margin-bottom: 15px;">
 The 4j School District expects employees to fill in expense reports for mileage and parking reimbursement using a form that does not automatically calculate distances. Employees are instructed to use Google Maps to find the shortest-possible path between all of the building pairs on their forms; with more than 30 possible buildings to visit this can be quite burdensome.
 
 ### Features
