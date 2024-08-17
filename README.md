@@ -5,7 +5,7 @@ The 4j School District expects employees to fill in expense reports for mileage 
 ### Features
 This program allows the user to:
 
- - Use the [Google Maps Directions API](https://developers.google.com/maps/documentation/directions/overview) to find the shortest-possible path between buildings (both directions considered in calculation)
+ - Have the [Google Maps Directions API](https://developers.google.com/maps/documentation/directions/overview) find the shortest-possible path between buildings (both directions considered in calculation)
  - Customize the set of school buildings to query, including colloquial names and custom addresses
  - Create a Comma Separated Value (CSV) table containing the results
  - Serialize a Python dictionary to a file that contains the results for use by this or [other Python programs](https://github.com/inductivekickback/rainbow)
