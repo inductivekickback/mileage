@@ -8,7 +8,7 @@ This program allows the user to:
  - Have the [Google Maps Directions API](https://developers.google.com/maps/documentation/directions/overview) find the shortest-possible path between buildings (both directions considered in calculation)
  - Customize the set of school buildings to query, including colloquial names and custom addresses
  - Create a Comma Separated Value (CSV) table containing the results
- - Serialize a Python dictionary to a file that contains the results for use by this or [other Python programs](https://github.com/inductivekickback/rainbow)
+ - Serialize a Python dictionary to a file that contains the results for use by this or [other Python programs](https://github.com/inductivekickback/smiles)
 
 **NOTE:** The [Distance Matrix API](https://developers.google.com/maps/documentation/distance-matrix/overview) is **not** used because it only offers the "best" route between buildings -- not a list from which you can determine the shortest distance.
 
