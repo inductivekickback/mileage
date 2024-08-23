@@ -1,12 +1,16 @@
-"""Uses Google maps to compute the shortest-possible driving distances between all 4J schools."""
+"""Uses Google maps to compute the shortest-possible driving distances between all 4j schools."""
 import sys
 import csv
 import argparse
 import math
 import pickle
+from datetime import datetime
 
 import googlemaps
 
+
+__version__ = '1.1.0'
+__date__ = "Aug '24"
 
 METERS_TO_MILES = 0.00062
 SCHOOL_TYPE_INDX = 0
@@ -63,6 +67,7 @@ def _query_dist(origin, dest, addresses, api_key):
     # Use the shortest-possible distance when traveling in either direction.
     o = addresses[origin][SCHOOL_ADDR_INDX]
     d = addresses[dest][SCHOOL_ADDR_INDX]
+    print(f"_query_dist({origin}, {dest})")
     gmaps = googlemaps.Client(key=api_key)
     fwd_result = gmaps.directions(o, d, mode="driving", units="imperial", alternatives=True)
     rev_result = gmaps.directions(d, o, mode="driving", units="imperial", alternatives=True)
@@ -75,7 +80,7 @@ def _query_dist(origin, dest, addresses, api_key):
     return meters
 
 
-def _create_output(table_file, cats, distances):
+def _create_table(table_file, cats, distances):
     data = [['']]
 
     # Offset column titles by a space.
@@ -105,28 +110,27 @@ def _create_output(table_file, cats, distances):
         writer.writerows(data)
 
 
-def _create_data(pairs, colocations, addresses, api_key):
+def _create_data(existing_data, pairs, colocations, addresses, api_key):
     data = {}
     for o, d in pairs:
         # Create symmetrical entries for the origin and destination. Use existing distance
         # measurements if they are found.
-        if not o in data:
+        if o in existing_data:
+            data[o] = existing_data[o]
+        elif not o in data:
             data[o] = {}
-        if not d in data:
+
+        if d in existing_data:
+            data[d] = existing_data[d]
+        elif not d in data:
             data[d] = {}
 
         dist = None
         if d in data[o]:
-            if data[d][o] != -1:
-                print(f'Data already contains a measurement: {o}->{d}')
-                dist = data[o][d]
-        if o in data[d]:
-            if data[d][o] != -1:
-                if not dist:
-                    print(f'Data already contains a measurement: {o}->{d}')
-                    dist = data[d][o]
-                elif dist != data[d][o]:
-                    print(f'WARNING: Incompatable distance values: {dist}!={data[d][o]}')
+            dist = data[o][d]
+        if not dist:
+            if o in data[d]:
+                dist = data[d][o]
 
         if not dist:
             try:
@@ -163,42 +167,47 @@ def _main():
         print('ERROR: Either an API KEY or data file is required.')
         sys.exit(-3)
 
-    if args.address_file and args.data_in:
-        print('WARNING: Ignoring CSV input file because an input data file was specified.')
-
     if not args.address_file and not args.data_in:
         print('ERROR: Either an input file or data file is required.')
         sys.exit(-3)
 
     addrs = None
+    data_addrs = None
     data = None
     if args.data_in:
         with open(args.data_in, 'rb') as file:
-            addrs, data = pickle.load(file)
+            result = pickle.load(file)
+            if len(result) == 2:
+                data_addrs, data = result
+            else:
+                _, data_addrs, data = result
 
-    if not addrs:
+    if args.address_file:
         try:
             addrs = _import_addresses(args.address_file)
         except FileNotFoundError as err:
             print(err)
             sys.exit(-1)
 
+    # If the address file exists then it should override the data_addrs?
+    if not addrs:
+        addrs = data_addrs
+
     pairs, colocations = _generate_pairs(addrs)
 
-    if not data:
-        data = _create_data(pairs, colocations, addrs, args.api_key)
+    updated_data = _create_data(data, pairs, colocations, addrs, args.api_key)
     cats = _split_and_sort(addrs)
 
     if args.data_out:
         try:
             # Don't crash just because the data file couldn't be opened.
             with open(args.data_out, 'wb') as file:
-                pickle.dump((addrs, data), file)
+                pickle.dump((datetime.now(), addrs, updated_data), file)
         except Exception as err:
             print(err)
-            print((addrs, data))
+            print((datetime.now(), addrs, data))
 
-    _create_output(args.table_file, cats, data)
+    _create_table(args.table_file, cats, updated_data)
     sys.exit(0)
 
 
