@@ -67,7 +67,6 @@ def _query_dist(origin, dest, addresses, api_key):
     # Use the shortest-possible distance when traveling in either direction.
     o = addresses[origin][SCHOOL_ADDR_INDX]
     d = addresses[dest][SCHOOL_ADDR_INDX]
-    print(f"_query_dist({origin}, {dest})")
     gmaps = googlemaps.Client(key=api_key)
     fwd_result = gmaps.directions(o, d, mode="driving", units="imperial", alternatives=True)
     rev_result = gmaps.directions(d, o, mode="driving", units="imperial", alternatives=True)
@@ -115,22 +114,16 @@ def _create_data(existing_data, pairs, colocations, addresses, api_key):
     for o, d in pairs:
         # Create symmetrical entries for the origin and destination. Use existing distance
         # measurements if they are found.
-        if o in existing_data:
-            data[o] = existing_data[o]
-        elif not o in data:
+        dist = None
+        if not o in data:
             data[o] = {}
 
-        if d in existing_data:
-            data[d] = existing_data[d]
-        elif not d in data:
+        if not d in data:
             data[d] = {}
 
-        dist = None
-        if d in data[o]:
-            dist = data[o][d]
-        if not dist:
-            if o in data[d]:
-                dist = data[d][o]
+        if o in existing_data:
+            if d in existing_data[o]:
+                dist = existing_data[o][d]
 
         if not dist:
             try:
@@ -173,7 +166,7 @@ def _main():
 
     addrs = None
     data_addrs = None
-    data = None
+    data = {}
     if args.data_in:
         with open(args.data_in, 'rb') as file:
             result = pickle.load(file)
